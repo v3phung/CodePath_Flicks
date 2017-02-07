@@ -69,7 +69,7 @@ class FlicksController: UIViewController, UITableViewDataSource, UITableViewDele
         
         if let posterPath = movie["poster_path"] as? String {
         
-            let baseUrl = "https://img.tmdb.org/t/p/w500"
+            let baseUrl = "https://image.tmdb.org/t/p/w500"
             let imageUrl = NSURL(string:baseUrl + posterPath)
             cell.posterView.setImageWith(imageUrl as! URL)
         }
