@@ -14,6 +14,8 @@ class FlicksController: UIViewController, UITableViewDataSource, UITableViewDele
     @IBOutlet weak var tableView: UITableView!
     
     var movies: [NSDictionary]?
+    var refreshControl: UIRefreshControl
+    var endpoint: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +30,7 @@ class FlicksController: UIViewController, UITableViewDataSource, UITableViewDele
         
         
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")!
+        let url = URL(string: "https://api.themoviedb.org/3/movie/\(self.endpoint!)?api_key=\(apiKey)")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         MBProgressHUD.showAdded(to: self.view, animated: true) //for reload
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
@@ -98,9 +100,8 @@ class FlicksController: UIViewController, UITableViewDataSource, UITableViewDele
         cell.titleLable.text = title
         cell.overviewLable.text = overview
         
+        let baseUrl = "https://image.tmdb.org/t/p/w500"
         if let posterPath = movie["poster_path"] as? String {
-        
-            let baseUrl = "https://image.tmdb.org/t/p/w500"
             let imageUrl = NSURL(string:baseUrl + posterPath)
             cell.posterView.setImageWith(imageUrl as! URL)
         }
@@ -127,7 +128,8 @@ class FlicksController: UIViewController, UITableViewDataSource, UITableViewDele
         let indexPath = tableView.indexPath(for: cell)
         let movie = movies![indexPath!.row]
         
-        let detailViewController = segue.destination
+        let detailViewController = segue.destination as! DetailViewController
+        detailViewController.movie = movie
     
     }
     
