@@ -97,6 +97,8 @@ class FlicksController: UIViewController, UITableViewDataSource, UITableViewDele
         let title = movie["title"] as! String
         let overview = movie["overview"] as! String
         
+        
+        
         cell.titleLable.text = title
         cell.overviewLable.text = overview
         
@@ -108,7 +110,11 @@ class FlicksController: UIViewController, UITableViewDataSource, UITableViewDele
         else{
             cell.posterView.image = nil
         }
-        
+        //cell.selectionStyle = .none
+        // Use a red color when the user selects the cell
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.lightGray
+        cell.selectedBackgroundView = backgroundView
         
         
         print("row \(indexPath.row)")
