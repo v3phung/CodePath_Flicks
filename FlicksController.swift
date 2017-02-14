@@ -14,7 +14,7 @@ class FlicksController: UIViewController, UITableViewDataSource, UITableViewDele
     @IBOutlet weak var tableView: UITableView!
     
     var movies: [NSDictionary]?
-    var refreshControl: UIRefreshControl
+    var refreshControl = UIRefreshControl()
     var endpoint: String!
 
     override func viewDidLoad() {
